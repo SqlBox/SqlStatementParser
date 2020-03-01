@@ -17,13 +17,13 @@ SELECT * FROM table1; --First Statement
                 ;
                 INSERT INTO T VALUES; --Third Statement
 ```
+##### Get a list of ranges from every statement found
 
 ```csharp
 var parser = new SqlStatementParserWrapper(sql, DbType.MYSQL);
  
 List<StatementRange> ranges = parser.Parse();
 ```
-##### Get a list of ranges from every statement found
 - every <b>range</b> contains a <b>start</b> and <b>end</b>.
 - <b>start</b> is the index where the statement starts
 - <b>end</b> is the length from the start till the end of the statement.
