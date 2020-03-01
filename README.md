@@ -19,7 +19,7 @@ SELECT * FROM table1; //First Statement
 ```
 
 ```csharp
- var parser = new SqlStatementParserWrapper(sql, DbType.MYSQL);
+var parser = new SqlStatementParserWrapper(sql, DbType.MYSQL);
  
 List<StatementRange> ranges = parser.Parse();
 ```
@@ -30,13 +30,13 @@ List<StatementRange> ranges = parser.Parse();
 - This is very useful and powerful since its able to handle million lines of code very fast <br>
 
 #### Get a list of string statements
-```charp
+```csharp
 var parser = new SqlStatementParserWrapper(sql, DbType.MYSQL);
 List<string> statements = SqlStatementParserWrapper.convert(parser.sql,parser.Parse());
 ```
 
 ##### Experimental Sql Formatter
-```charp
+```csharp
 string myformattedSQL = new Formatter().Format(sql);
 ```
 ## Getting started
@@ -44,7 +44,7 @@ string myformattedSQL = new Formatter().Format(sql);
 **SqlStatementParser** is redistributed as a <b> [NuGet package](https://www.nuget.org/packages/protectsoft.SqlStatementParser)</b>. All the code is managed and doesn't have any native dependencies, therefore you are ready to go after referencing the package. This also means the library works on **Windows**, **Linux** and **MacOS X**.
 
 ##### namespaces
-```charp
+```csharp
 using com.protectsoft.SqlStatementParser;
 using com.protectsoft.SqlStatementParser.formatter;
 ```
