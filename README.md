@@ -29,7 +29,7 @@ List<StatementRange> ranges = parser.Parse();
 - <b>end</b> is the length from the start till the end of the statement.
 - This is very useful and powerful since its able to handle million lines of code very fast <br>
 
-#### Get a list of string statements
+### Get a list of string statements
 ```csharp
 var parser = new SqlStatementParserWrapper(sql, DbType.MYSQL);
 List<string> statements = SqlStatementParserWrapper.convert(parser.sql,parser.Parse());
