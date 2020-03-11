@@ -67,7 +67,7 @@ namespace com.protectsoft.SqlStatementParser
                     case '-': // Possible single line comment.
                         {
                             char* end_char = tail + 2;
-                            if (*(tail + 1) == '-' && (*end_char == ' ' || *end_char == '\t' || isLineBreak(end_char, new_line)))
+                            if (*(tail + 1) == '-')
                             {
                                 // Skip everything until the end of the line.
                                 tail += 2;
@@ -104,26 +104,61 @@ namespace com.protectsoft.SqlStatementParser
                             have_content = true;
                             //Possible start of a block code
                             //run and find the next closing $ and keep the keyword
-                            char* run = tail;
-                            bool isDelimiter = true;
-                            break;
-                            if (*run == ' ' && isDelimiter)
+                            char* run = tail;                       
+                            char* end_char = tail + 2;
+                            if (*(tail + 1) == '$' && (*end_char == ' ' || *end_char == '\t' || isLineBreak(end_char, new_line)))
                             {
-                                // Delimiter keyword found. Get the new delimiter (everything until the end of the line).
+                                //case of $$
+                                delimiter = "$$";
+                                fixed(char* delimiter_head_alloc = delimiter)
+                                {
+                                    delimiter_head = delimiter_head_alloc;
+                                }
+                                while(isLineBreak(run,new_line))
+                                {
+                                    ++currentLine;
+                                    ++run;
+                                }
                                 tail = run;
+                                head = tail;
+                                statementStart = currentLine;
+                            } else if(*(tail + 1) != 48)//cant be leading zero after $
+                            {
+                                //scan for the block word
                                 StringBuilder delimiterBuilder = new StringBuilder();
+                                delimiterBuilder.Append(*run);//append first $
+                                run++;
+                                bool is_block_valid = true;
                                 while (run < end && *run != '\n' && *run != '\0')
                                 {
-                                    if (*run != ' ' && *run != 13)
+                                    bool is_dollar = *run == 36;
+                                    bool is_number = *run >= 48 && *run <= 57;
+                                    bool is_cap = *run >= 65 && *run <= 90;
+                                    bool is_underscore = *run == 95;
+                                    bool is_lower = *run >= 97 && *run <= 122;
+                                    bool is_extended_set = *run >= 128;
+                                    if(is_dollar || is_number || is_cap || is_underscore || is_lower || is_extended_set)
                                     {
                                         delimiterBuilder.Append(*run);
+                                        if(is_dollar)
+                                        {
+                                            run++;
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        is_block_valid = false;
                                     }
                                     run++;
                                 }
-                                delimiter = delimiterBuilder.ToString();
-                                fixed (char* dhead = delimiter)
+                                if(is_block_valid)
                                 {
-                                    delimiter_head = dhead;
+                                    delimiter = delimiterBuilder.ToString();
+                                    fixed (char* dhead = delimiter)
+                                    {
+                                        delimiter_head = dhead;
+                                    }
                                 }
                                 while (isLineBreak(run, new_line))
                                 {
@@ -133,9 +168,10 @@ namespace com.protectsoft.SqlStatementParser
                                 tail = run;
                                 head = tail;
                                 statementStart = currentLine;
+                            } else
+                            {
+                                tail++;
                             }
-                            else
-                                ++tail;
                             break;
                         }
                     default:
@@ -189,6 +225,11 @@ namespace com.protectsoft.SqlStatementParser
                                 if (includeInRange(startT, endT))
                                 {
                                     ranges.Add(new StatementRange(startT, endT));
+                                    fixed (char* delimiter_head_alloc = ";")
+                                    {
+                                        delimiter_head = delimiter_head_alloc;
+                                        delimiter = ";";
+                                    }
                                 }
                             }
                             tail = run;

@@ -122,25 +122,18 @@ namespace com.protectsoft.SqlStatementParser
                             for (int i = 0; i < delimiterarr.Length; i++)
                             {
                                 if (char.ToLower(delimiterarr[i]) == char.ToLower(*run))
-                                {
                                     ++run;
-                                }
                                 else
-                                {
                                     isDelimiter = false;
-                                }
                             }
                             if (*run == ' ' && isDelimiter)
                             {
                                 // Delimiter keyword found. Get the new delimiter (everything until the end of the line).
-                                tail = run;
                                 StringBuilder delimiterBuilder = new StringBuilder();
                                 while (run < end && *run != '\n' && *run != '\0')
                                 {
                                     if (*run != ' ' && *run != 13)
-                                    {
                                         delimiterBuilder.Append(*run);
-                                    }
                                     run++;
                                 }
                                 delimiter = delimiterBuilder.ToString();
