@@ -15,18 +15,24 @@ namespace SqlStatementParser.Tests
             this.dbType = (DbType)(object)t;
         }
 
-        /*[Test, TestCaseSource(typeof(SqlProvider), "statementProvider")]
+        [Test, TestCaseSource(typeof(SqlProvider), "statementProvider")]
         public void TestParser(string sql, int expectedStatements)
         {
             Assert.AreEqual(expectedStatements, new SqlStatementParserWrapper(sql, dbType).Parse().Count);
-        }*/
+        }
 
         [Test, TestCaseSource(typeof(PostgreSqlProvider), "postgreSqlstatementProvider")]
-        public void TestMysqlParser(string sql, int expectedStatements)
+        public void TestPostgreSqlParser(string sql, int expectedStatements)
         {
-            Assert.AreEqual(expectedStatements, new SqlStatementParserWrapper(sql, dbType).Parse().Count);
+            List<StatementRange> ranges = new SqlStatementParserWrapper(sql, dbType).Parse();
+            Assert.AreEqual(expectedStatements, ranges.Count);
+            List<string> list = SqlStatementParserWrapper.convert(sql, ranges);
+            foreach(string s in list)
+            {
+                Console.WriteLine("Query:"+s);
+            }
         }
-/*
+
         [Test, TestCaseSource(typeof(SqlProvider), "statementProvider")]
         public void TestConvert(string sql, int expectedStatements)
         {
@@ -35,10 +41,10 @@ namespace SqlStatementParser.Tests
         }
 
         [Test, TestCaseSource(typeof(PostgreSqlProvider), "postgreSqlstatementProvider")]
-        public void TestMySqlConvert(string sql, int expectedStatements)
+        public void TestPostgreSqlConvert(string sql, int expectedStatements)
         {
             SqlStatementParserWrapper parser = new SqlStatementParserWrapper(sql, dbType);
             Assert.AreEqual(expectedStatements, SqlStatementParserWrapper.convert(parser.sql, parser.Parse()).Count);
-        }*/
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace com.protectsoft.SqlStatementParser
         ORACLE = 2,
         POSTGRES = 3,
         SQLSERVER = 4,
-        SQLITE = 5
+        SQLITE = 5,
+        DB2 = 6
     }
 }

@@ -12,11 +12,14 @@
     <Copyright>2020 Avraam Piperidis</Copyright>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <PackageProjectUrl>https://github.com/SqlBox/SqlStatementParser</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SqlBox/SqlStatementParser</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>sql c# library</PackageTags>
+    <PackageReleaseNotes>PostgreSql Statement Parser added</PackageReleaseNotes>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>avraamvskey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

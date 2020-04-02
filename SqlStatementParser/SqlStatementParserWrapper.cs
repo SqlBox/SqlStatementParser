@@ -24,7 +24,7 @@ namespace com.protectsoft.SqlStatementParser
                 SqlStatementParser p = SqlStatementParserFactory.createSqlStatementParser(sql, dbType);
                 fixed (char* s = sql)
                 {
-                    p.determineStatementRanges(s, sql.Length, ";", ranges, "\n");
+                    p.determineStatementRanges(s, sql.Length,";", ranges, "\n");
                     return ranges;
                 }
             }
