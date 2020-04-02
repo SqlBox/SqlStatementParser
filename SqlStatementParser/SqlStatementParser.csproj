@@ -18,7 +18,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>sql c# library</PackageTags>
     <PackageReleaseNotes>PostgreSql Statement Parser added</PackageReleaseNotes>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>avraamvskey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
