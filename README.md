@@ -46,6 +46,17 @@ string myformattedSQL = new Formatter().Format(sql);
 
 **SqlStatementParser** is redistributed as a <b> [NuGet package](https://www.nuget.org/packages/protectsoft.SqlStatementParser)</b>. All the code is managed and doesn't have any native dependencies, therefore you are ready to go after referencing the package. This also means the library works on **Windows**, **Linux** and **MacOS X**.
 
+## Progress
+- [x] MySql
+- [x] MariaDb
+- [x] SQLITE
+- [x] PostgreSql
+- [ ] Oracle
+- [ ] DB2
+- [ ] SQL SERVER
+- [ ] Firebird
+- [ ] VistaDb
+
 ##### namespaces
 ```csharp
 using com.protectsoft.SqlStatementParser;
