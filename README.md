@@ -2,8 +2,10 @@
 ## basic usage <br>
 The following sql code should break down into three seperate statements.<br>
 ```sql
-SELECT * FROM table1; --First Statement
-                DELIMITER $$ --Second Statement
+-- First Statement
+SELECT * FROM table1; 
+		-- Second Statement
+                DELIMITER $$ 
                 USE `mydatabaser`;
                 CREATE DEFINER=`root`@`localhost` PROCEDURE `my_procedure`()
                 BEGIN --comment
@@ -15,7 +17,8 @@ SELECT * FROM table1; --First Statement
                 */
                 DELIMITER ;  
                 ;
-                INSERT INTO T VALUES; --Third Statement
+		-- Third Statement
+                INSERT INTO T VALUES; 
 ```
 ##### Get a list of ranges from every statement found
 
