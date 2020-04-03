@@ -1,6 +1,6 @@
 # C# SQL Statement Parser library
 ## basic usage <br>
-The following sql code should break down into three seperate statements.<br>
+The following MYSQL code should break down into three seperate statements.<br>
 ```sql
 -- First Statement
 SELECT * FROM table1; 
@@ -19,6 +19,17 @@ SELECT * FROM table1;
                 ;
 		-- Third Statement
                 INSERT INTO T VALUES; 
+```
+The following PostgreSql should break into two statements. <br>
+```sql
+CREATE PROCEDURE insert_data(a integer, b integer)
+LANGUAGE SQL
+AS $$
+INSERT INTO tbl VALUES (a);
+INSERT INTO tbl VALUES (b);
+$$;
+
+CALL insert_data(1, 2);
 ```
 ##### Get a list of ranges from every statement found
 
