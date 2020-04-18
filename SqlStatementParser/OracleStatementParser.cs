@@ -33,7 +33,8 @@ namespace com.protectsoft.SqlStatementParser
             bool have_content = false; // Set when anything else but comments were found for the current statement.
             int statementStart = 0;
             int currentLine = 0;
-            while (!_stop && tail < end)
+            char* safe_exit = head;
+            while (!_stop && tail < end && safe_exit < end)
             {
                 switch (*tail)
                 {
@@ -210,6 +211,7 @@ namespace com.protectsoft.SqlStatementParser
                         }
                     }
                 }
+                safe_exit++;
             }
 
             // Add remaining text to the range list.

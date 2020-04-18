@@ -375,8 +375,8 @@ namespace com.protectsoft.SqlStatementParser.formatter
                         break;
 
                     case "create":
-                        token += "\n";
-                        break;
+                        //token += "\n";
+                        //break;
                     case "insert":
                     case "insert into":
                     case "update":
