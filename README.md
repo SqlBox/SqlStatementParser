@@ -60,8 +60,8 @@ string myformattedSQL = new Formatter().Format(sql);
 ## Progress
 - [x] MySql
 - [x] MariaDb
-- [x] SQLITE
 - [x] PostgreSql
+- [ ] SQLITE
 - [ ] Oracle
 - [ ] DB2
 - [ ] SQL SERVER
