@@ -13,6 +13,9 @@ namespace com.protectsoft.SqlStatementParser
             this.isMariaDb = isMariaDb;
         }
 
+        ~MySqlStatementParser() { }
+
+
         //Algorithm Originated from mysql workbench
         unsafe internal override void determineStatementRanges(char* sql, int length, string initial_delimiter, List<StatementRange> ranges, string line_break)
         {
@@ -120,6 +123,12 @@ namespace com.protectsoft.SqlStatementParser
                             // Possible start of the keyword DELIMITER. Must be at the start of the text or a character,
                             char* run = tail;
                             bool isDelimiter = true;
+                            
+                            char previous = (char)(tail > start ? *(tail - 1) : 0);
+                            bool is_identifier_char = previous >= 0x80 || (previous >= '0' && previous <= '9') ||
+                              ((previous | 0x20) >= 'a' && (previous | 0x20) <= 'z') || previous == '$' ||
+                              previous == '_';
+
                             for (int i = 0; i < delimiterarr.Length; i++)
                             {
                                 if (char.ToLower(delimiterarr[i]) == char.ToLower(*run))
@@ -127,7 +136,7 @@ namespace com.protectsoft.SqlStatementParser
                                 else
                                     isDelimiter = false;
                             }
-                            if (*run == ' ' && isDelimiter)
+                            if (*run == ' ' && isDelimiter && !is_identifier_char)
                             {
                                 // Delimiter keyword found. Get the new delimiter (everything until the end of the line).
                                 StringBuilder delimiterBuilder = new StringBuilder();
@@ -152,7 +161,9 @@ namespace com.protectsoft.SqlStatementParser
                                 statementStart = currentLine;
                             }
                             else
+                            {
                                 ++tail;
+                            }
                             break;
                         }
                     default:

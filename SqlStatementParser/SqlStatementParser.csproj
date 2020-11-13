@@ -12,12 +12,12 @@
     <Copyright>2020 Avraam Piperidis</Copyright>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <PackageProjectUrl>https://github.com/SqlBox/SqlStatementParser</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SqlBox/SqlStatementParser</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>sql c# library</PackageTags>
-    <PackageReleaseNotes>PostgreSql Statement Parser added</PackageReleaseNotes>
+    <PackageReleaseNotes>Mysql parser bug using delimiter+table name fixecd</PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>avraamvskey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
